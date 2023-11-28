@@ -1,19 +1,36 @@
 const{Pokemon} = require("../db")
 const axios = require("axios");
 
-const searchPokemonName = () => {
+const searchPokemonName = async (nombre) => {
+    const databasePokemon = await Pokemon.findAll({where: {nombre: nombre}});
 
+    if (databasePokemon.length === 0) { 
+    const apiPokemon = (await axios.get("https://pokeapi.co/api/v2/pokemon/"))
+    .data.results; 
+    //console.log(apiPokemon)
+    const filteredApi = apiPokemon.filter((pokemon) => pokemon.nombre === nombre);
+
+    return filteredApi;
+         } else { 
+            return databasePokemon;
+         }
 };
+    
+      
 
 const getAllPokemon = async () => {
     const databasePokemon = await Pokemon.findAll();
-
-    const apiPokemon = (await axios.get("https://pokeapi.co/api/v2/pokemon/")).data.results;
-    //console.log(apiPokemon)
+  
+    const apiPokemon = (await axios.get("https://pokeapi.co/api/v2/pokemon/"))
+      .data.results;
+  
     const results = [...databasePokemon, ...apiPokemon];
+  
     return results;
-};
-
+  };
+  
+  
+  
 
 const getPokemonId = async (id, source) => {
     const pokemon = 

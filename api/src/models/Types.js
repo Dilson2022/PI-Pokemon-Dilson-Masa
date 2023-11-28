@@ -5,9 +5,9 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Types', {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       primaryKey: true,
-      autoIncrement: true,
+      defaultValue: DataTypes.UUIDV4
         },
 
     nombre: {
@@ -17,3 +17,4 @@ module.exports = (sequelize) => {
 
   });
 };
+
