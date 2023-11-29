@@ -1,14 +1,14 @@
 const{Pokemon} = require("../db")
 const axios = require("axios");
 
-const searchPokemonName = async (nombre) => {
+const searchPokemonName = async (name) => {
     const databasePokemon = await Pokemon.findAll({where: {nombre: nombre}});
 
     if (databasePokemon.length === 0) { 
-    const apiPokemon = (await axios.get("https://pokeapi.co/api/v2/pokemon/"))
+    const apiPokemon = (await axios.get( `https://pokeapi.co/api/v2/pokemon/${name} `))
     .data.results; 
     //console.log(apiPokemon)
-    const filteredApi = apiPokemon.filter((pokemon) => pokemon.nombre === nombre);
+    const filteredApi = apiPokemon.filter((pokemon) => pokemon.name === nombre);
 
     return filteredApi;
          } else { 
@@ -54,8 +54,6 @@ const getAllPokemon = async () => {
 
   
   
-  
-
 const getPokemonId = async (id, source) => {
     const pokemon = 
     source === "api" 
@@ -64,6 +62,8 @@ const getPokemonId = async (id, source) => {
     : await Pokemon.findByPk(id);
     return pokemon;
 };
+  
+
 
 const createPokemon = async (id, nombre, imagen, vida, ataque, defensa, velocidad, altura, peso) =>
  await Pokemon.create({id, nombre, imagen, vida, ataque, defensa, velocidad, altura, peso});

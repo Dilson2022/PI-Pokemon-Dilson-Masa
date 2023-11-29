@@ -6,15 +6,16 @@ module.exports = (sequelize) => {
  
     sequelize.define('Types',{
         id : {
-            type : DataTypes.INTEGER,
-            primaryKey : true,
-            //autoIncrement : true
+            type: DataTypes.UUID,
+           allowNull: false,
+            primaryKey: true,
+            defaultValue: DataTypes.UUIDV4,
         },
         name : {
-            type : DataTypes.TEXT,
+            type : DataTypes.STRING,
             allowNull : false,
            
         }
-    }, {freezeTableName : true, timestamps : false})
+    }, { timestamps : false})
 }
  
