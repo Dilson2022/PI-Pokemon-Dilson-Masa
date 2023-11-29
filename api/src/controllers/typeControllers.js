@@ -2,24 +2,36 @@ const axios = require("axios");
 const {Types} = require("../db");
 
 
+
+
 const getTypes = async()=>{
     const typesdb = await Types.findAll()
-    if(typesdb){
+    if(typesdb.length){
         return typesdb
     } else{
-        const response = (await axios.get("https://pokeapi.co/api/v2/type"))
-        //console.log(response.data);
-        const types = response.data.results.map((t)=>{return {nombre:t.nombre}})
-    await Types.bulkCreate(types)
-    return await Types.findAll()
+        const types = (await axios.get(URL_API_TYPES)).data.results.map((t)=>({
+            id: t.id,
+            nome: t.name
+        }))
+        await Types.bulkCreate(types)
+        return await Types.findAll()
     }
-
-
 }
-
+        
 module.exports ={
     getTypes
-};
+}
+
+
+
+    
+      
+  
+      
+      
+  
+  
+
    
 
 
