@@ -7,8 +7,13 @@ const {
 
 const getAllPokemonHandler = async (req, res) => {
   const { name } = req.query;
-  const results = name ? await searchPokemonName(name) : await getAllPokemon();
-  res.status(200).json(results);
+  try {
+    const results = name ? await searchPokemonName(name) : await getAllPokemon();
+    res.status(200).json(results);
+    
+  } catch (error) {
+    res.status(400).json({error: error.message})
+  }
 };
 
  

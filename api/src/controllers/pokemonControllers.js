@@ -5,51 +5,52 @@ const searchPokemonName = async (name) => {
   const databasePokemon = await Pokemon.findAll({ where: { nombre: name } });
 
   if (databasePokemon.length === 0) {
-    const apiPokemon = (
-      await axios.get(`https://pokeapi.co/api/v2/pokemon/${name} `)).data.results;
-    //console.log(apiPokemon)
-    const filteredApi = apiPokemon.filter((pokemon) => pokemon.name === name);
-
-    return filteredApi;
+    const apiPokemon = (await axios.get(`https://pokeapi.co/api/v2/pokemon/${name} `)).data
+    return apiPokemon;
   } else {
     return databasePokemon;
   }
+  
 };
+    
+    
+
+
 
 const getAllPokemon = async () => {
   const databasePokemon = await Pokemon.findAll();
 
-  const apiPokemon = (await axios.get("https://pokeapi.co/api/v2/pokemon/"))
-    .data.results;
-
+  const apiPokemon = (await axios.get("https://pokeapi.co/api/v2/pokemon/")).data.results;
+  
   const results = [];
-
-  for (const pokemon of apiPokemon) {
-    const url = pokemon.url;
-
-    // Realiza una llamada a la API a la URL del Pokémon
-    const response = await axios.get(url);
-    const infoFromApi = response.data;
-
-    // Extrae los atributos deseados
-    const extraerData = {
-      id: infoFromApi.id,
-      nombre: infoFromApi.name,
-      tipos: infoFromApi.types.map((t) => t.type.name),
-      img: infoFromApi.sprites.other["official-artwork"].front_default,
-
-      ataque: infoFromApi.stats[1].base_stat,
-      defensa: infoFromApi.stats[2].base_stat,
-      velocidad: infoFromApi.stats[5].base_stat,
-      peso: infoFromApi.weight,
-      altura: infoFromApi.height,
-    };
-
-    results.push(extraerData);
-  }
-
-  return results;
-};
+    for (const pokemon of apiPokemon) {
+      const url = pokemon.url;
+  
+      // Realiza una llamada a la API a la URL del Pokémon
+      const response = await axios.get(url);
+      const infoFromApi = response.data;
+  
+      // Extrae los atributos deseados
+      const extraerData = {
+        id: infoFromApi.id,
+        nombre: infoFromApi.name,
+        tipos: infoFromApi.types.map((t) => t.type.name),
+        img: infoFromApi.sprites.other["official-artwork"].front_default,
+  
+        ataque: infoFromApi.stats[1].base_stat,
+        defensa: infoFromApi.stats[2].base_stat,
+        velocidad: infoFromApi.stats[5].base_stat,
+        peso: infoFromApi.weight,
+        altura: infoFromApi.height,
+      };
+  
+      results.push(extraerData);
+    }
+  
+    return results;
+  };
+  
+ 
 
 
 const getPokemonId = async (id) => {
