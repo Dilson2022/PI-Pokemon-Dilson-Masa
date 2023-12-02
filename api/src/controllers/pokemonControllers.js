@@ -1,17 +1,38 @@
 const { Pokemon } = require("../db");
 const axios = require("axios");
 
+
 const searchPokemonName = async (name) => {
   const databasePokemon = await Pokemon.findAll({ where: { nombre: name } });
 
   if (databasePokemon.length === 0) {
-    const apiPokemon = (await axios.get(`https://pokeapi.co/api/v2/pokemon/${name} `)).data
-    return apiPokemon;
+    // Si no existe en la base de datos, busca en la API
+    const apiPokemonUrl = `https://pokeapi.co/api/v2/pokemon/${name}`;
+    const result = await axios.get(apiPokemonUrl);
+    const apiPokemon = result.data;
+   
+
+    // Extrae los atributos deseados
+    const extraerData = {
+      id: apiPokemon.id,
+      nombre: apiPokemon.name,
+      tipos: apiPokemon.types.map((t) => t.type.name),
+      img: apiPokemon.sprites.other["official-artwork"].front_default,
+      ataque: apiPokemon.stats[1].base_stat,
+      defensa: apiPokemon.stats[2].base_stat,
+      velocidad: apiPokemon.stats[5].base_stat,
+      peso: apiPokemon.weight,
+      altura: apiPokemon.height,
+    };
+
+    return extraerData;
   } else {
+    // Si existe en la base de datos, devuélvelo
     return databasePokemon;
   }
-  
 };
+
+
     
     
 
@@ -23,13 +44,14 @@ const getAllPokemon = async () => {
   const apiPokemon = (await axios.get("https://pokeapi.co/api/v2/pokemon/")).data.results;
   
   const results = [];
+
     for (const pokemon of apiPokemon) {
-      const url = pokemon.url;
+      const url = pokemon.url; // Extraigo la url del pokemon actual de la lista
   
       // Realiza una llamada a la API a la URL del Pokémon
       const response = await axios.get(url);
+      
       const infoFromApi = response.data;
-  
       // Extrae los atributos deseados
       const extraerData = {
         id: infoFromApi.id,
@@ -75,14 +97,7 @@ const getPokemonId = async (id) => {
     }),
   };
 
-  // const pokemon = source === "api"
-  //   ? (await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`))
-  //     .data
-  //   : await Pokemon.findByPk(id);
-
-  // pokemon.id = id;
-
-  // return pokemon;
+ 
 };
 
 const createPokemon = async (

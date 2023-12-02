@@ -34,28 +34,8 @@ const getAllPokemonHandlerId = async (req, res) => {
 
 const getAllPokemonPost = async (req, res) => {
   try {
-    const {
-      id,
-      nombre,
-      imagen,
-      vida,
-      ataque,
-      defensa,
-      velocidad,
-      altura,
-      peso,
-    } = req.body;
-    const newPokemon = await createPokemon(
-      id,
-      nombre,
-      imagen,
-      vida,
-      ataque,
-      defensa,
-      velocidad,
-      altura,
-      peso
-    );
+    const {id, nombre, imagen, vida, ataque, defensa, velocidad, altura, peso, } = req.body;
+    const newPokemon = await createPokemon(id, nombre, imagen, vida, ataque, defensa, velocidad, altura, peso);
     res.status(201).json(newPokemon);
   } catch (error) {
     res.status(400).json({ error: error.message });

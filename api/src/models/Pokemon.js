@@ -34,10 +34,10 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
     },
     altura: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
     },
     peso: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
     }
   }, {
     timestamps: false,
