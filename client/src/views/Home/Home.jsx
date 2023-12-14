@@ -5,7 +5,7 @@ import {getPokemons} from "../../redux/actions"
 
 
 const Home = () => {
-    const dispatch = useDispatch
+    const dispatch = useDispatch();
 
     useEffect(()=>{
         dispatch(getPokemons());

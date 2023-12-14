@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 const CardsContainer = () => {
    
 	const pokemons = useSelector(state=>state.pokemons);
+    //console.log(pokemons)
 	
     return(
         <div className={style.CardsContainer}>
@@ -12,7 +13,7 @@ const CardsContainer = () => {
                 return <Card
 
                 id={pokemon.id}
-                nombre={pokemon.nombre}
+                nombre={pokemon.name}
                 imagen={pokemon.img}
                 //vida={pokemon.vida}
                 ataque={pokemon.ataque}
