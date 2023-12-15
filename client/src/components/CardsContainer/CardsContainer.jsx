@@ -13,8 +13,9 @@ const CardsContainer = () => {
                 return <Card
 
                 id={pokemon.id}
-                nombre={pokemon.name}
+                nombre={pokemon.nombre}
                 imagen={pokemon.img}
+                tipos={pokemon.tipos}
                 //vida={pokemon.vida}
                 ataque={pokemon.ataque}
                 defensa={pokemon.defensa}
