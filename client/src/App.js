@@ -12,7 +12,7 @@ const location = useLocation();
       {location.pathname !== "/" && <NavBar/>}
       <Routes>
       <Route exact path="/" element={<Landing/>}/>
-      <Route path="/detail" element={<Detail/>}/>
+      <Route path="/detail/:id" element={<Detail/>}/>
       <Route path="/create" element={<Form/>}/>
       <Route path="/home" element={<Home/>} />
       </Routes>

@@ -3,6 +3,7 @@ import {GET_POKEMONS, GET_POKEMON} from "./actions";
 
 const initialState = {
     pokemons: [],
+    pokemon:[],
 };
 
 const rootReducer=(state = initialState, action)=>{

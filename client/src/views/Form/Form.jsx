@@ -9,15 +9,32 @@ const Form = () => {
         defensa:"",
         velocidad:"",
         peso:"",
-        altura:"",
+        altura:""
     })
-
+    // const [errors, setErrors] = useState({
+    //     nombre:"",
+    //     ataque:"",
+    //     defensa:"",
+    //     velocidad:"",
+    //     peso:"",
+    //     altura:""
+    // })
     const changeHandler = (event) => {
         const property = event.target.name;
         const value = event.target.value;
 
-        setForm({...form, [property]:value})
+         setForm({...form, [property]:value})
+    //     validate(form)
     }
+
+    
+    // const validate = (form) => {
+    //    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form.email)){
+    //      console.log("Todo bien");
+    //    }else{
+    //     console.log("Hay errores");
+    //    }
+    // }
 
     return(
         <form>
