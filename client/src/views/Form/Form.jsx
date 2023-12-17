@@ -1,5 +1,6 @@
 import {  useState } from "react";
 import style from "./Form.module.css"
+import axios from "axios";
 
 const Form = () => {
 
@@ -36,8 +37,17 @@ const Form = () => {
     //    }
     // }
 
+
+    const submitHandler = (event) => {
+        event.preventDefault()
+         axios.post("http://localhost:3001/pokemon",form)
+        .then(res=>alert(res))
+        .catch(err=>alert(err))
+        }
+
+
     return(
-        <form>
+        <form onSubmit={submitHandler}>
            <div className={style.form}>
             <label>Nombre:</label>
             <input type="text" value={form.nombre} onChange={changeHandler} name="nombre"/>
@@ -45,7 +55,7 @@ const Form = () => {
 
             <div>
             <label>Ataque:</label>
-            <input type="text"  value={form.ataque}  onChange={changeHandler} name="nombre"/>
+            <input type="text"  value={form.ataque}  onChange={changeHandler} name="ataque"/>
             </div> 
 
             <div>
@@ -67,7 +77,8 @@ const Form = () => {
             <label>Altura:</label>
             <input type="text"  value={form.altura}  onChange={changeHandler} name="altura"/>
             </div> 
-            
+
+            <button type="submit">Crear Pokemon</button>
         </form>
     )
 }

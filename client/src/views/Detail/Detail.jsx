@@ -7,6 +7,7 @@ const Detail = () => {
   const{id} = useParams();
   const dispatch = useDispatch();
   const pokemon = useSelector(state => state.pokemon);
+  //console.log(pokemon);
 
   useEffect(() => {
     dispatch(getPokemon(id));
@@ -16,18 +17,19 @@ const Detail = () => {
     return <div>pokemon no encontrado</div>
   }
 
-    const {ID, Nombre, img, Ataque, Defensa, Velocidad, Altura, Peso, Tipo} = pokemon;
+   
   return(
     <div>
       <p>ID: {id} </p>
       <p>Nombre: {pokemon.name}</p>
       <img src={pokemon.img} alt="pokemon" />
-      <p>Ataque: {pokemon. attack}</p>
+      <p>Ataque: {pokemon.attack}</p>
       <p>Defensa: {pokemon.defense}</p>
       <p>Velocidad: {pokemon.speed}</p>
       <p>Altura: {pokemon.height}</p>
       <p>Peso: {pokemon.weight}</p>
-       {/* <p>Tipo: {pokemon.types}</p>  */}
+      <p>Tipo: {pokemon.types && [...pokemon.types].map((type) => type.name).join(", ")}</p>
+  
     </div>
   )
 }
