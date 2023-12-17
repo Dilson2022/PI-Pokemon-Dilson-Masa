@@ -16,11 +16,11 @@ module.exports = (sequelize) => {
     },
     imagen: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     vida: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     ataque: {
       type: DataTypes.INTEGER,

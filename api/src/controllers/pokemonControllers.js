@@ -1,6 +1,9 @@
 const { Pokemon } = require("../db");
 const axios = require("axios");
 
+// const axiosInstance = axios.create({
+//   timeout: 60000,
+// });
 
 const searchPokemonName = async (name) => {
   const databasePokemon = await Pokemon.findAll({ where: { nombre: name } });
@@ -40,10 +43,14 @@ const searchPokemonName = async (name) => {
 
 const getAllPokemon = async () => {
   const databasePokemon = await Pokemon.findAll();
+  //console.log(databasePokemon)
 
   const apiPokemon = (await axios.get("https://pokeapi.co/api/v2/pokemon/")).data.results;
   
   const results = [];
+  for (const pokemon of databasePokemon) {
+    results.push(pokemon);
+  }
 
     for (const pokemon of apiPokemon) {
       const url = pokemon.url; // Extraigo la url del pokemon actual de la lista
@@ -58,19 +65,19 @@ const getAllPokemon = async () => {
         nombre: infoFromApi.name,
         tipos: infoFromApi.types.map((t) => t.type.name),
         img: infoFromApi.sprites.other["official-artwork"].front_default,
-  
         ataque: infoFromApi.stats[1].base_stat,
         defensa: infoFromApi.stats[2].base_stat,
         velocidad: infoFromApi.stats[5].base_stat,
         peso: infoFromApi.weight,
         altura: infoFromApi.height,
+        
       };
-  
       results.push(extraerData);
     }
-  
     return results;
   };
+  
+  
   
  
 
@@ -90,6 +97,7 @@ const getPokemonId = async (id) => {
     speed: res.stats[5].base_stat,
     height: res.height,
     weight: res.weight,
+    //vida: res.stats[0].base_stat,
     types: res.types.map((t) => {
       return {
         name: t.type.name,
@@ -100,28 +108,11 @@ const getPokemonId = async (id) => {
  
 };
 
-const createPokemon = async (
-  id,
-  nombre,
-  imagen,
-  vida,
-  ataque,
-  defensa,
-  velocidad,
-  altura,
-  peso
-) =>
-  await Pokemon.create({
-    id,
-    nombre,
-    imagen,
-    vida,
-    ataque,
-    defensa,
-    velocidad,
-    altura,
-    peso,
+const createPokemon = async (id, nombre, vida, ataque, defensa, velocidad, altura, peso) =>
+  await Pokemon.create({ id, nombre, vida, ataque, defensa, velocidad, altura, peso,
   });
+
+  
 
 module.exports = {
   createPokemon,
