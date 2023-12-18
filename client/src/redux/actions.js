@@ -2,6 +2,20 @@ import axios from "axios";
 
 export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_POKEMON = "GET_POKEMON"
+export const GET_SEARCH_POKEMON = "GET_SEARCH_POKEMON"
+
+export const searchPokemon = (name) => {
+  return async function (dispatch) {
+    const apiData = await axios.get(`http://localhost:3001/pokemon?name=${name}`)
+    const searchPokemon = [];
+    searchPokemon.push(apiData.data)
+    dispatch({
+      type: GET_SEARCH_POKEMON,
+      payload: searchPokemon
+ })
+  }
+};
+
 
 export const getPokemons = () => {
   return async function (dispatch) {
@@ -22,5 +36,18 @@ export const getPokemon = (id) =>{
     dispatch({
       type: GET_POKEMON, 
       payload: pokemon})
+    };
   };
-};
+  
+  
+  
+  
+  
+  // export const searchPokemon = (sear ch) => {
+  //   return async function (dispatch)
+  //     const apiData = await axios.get("");
+  //     const searchPokemon = apiData.data;
+  //     dispatch({
+  //       type: GET_SEARCH_POKEMON,
+  //       payload: searchPokemon})
+  // };
