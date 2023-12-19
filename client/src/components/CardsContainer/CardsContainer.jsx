@@ -7,12 +7,6 @@ const CardsContainer = () => {
 	const pokemons = useSelector(state=>state.pokemons);
     const searchPokemon = useSelector(state=>state.searchPokemon)
     
-
-    //console.log(pokemons)
-    // const onClose = () =>{
-        //     console.log("Cerrar algo")
-        
-        // } 
         return(
             <div className={style.CardsContainer}>
                 

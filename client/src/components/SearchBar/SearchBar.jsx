@@ -9,6 +9,7 @@ const SearchBar = () => {
 
   const handleSearch = () => {
     dispatch(searchPokemon(state));
+    setState("")
   };
 
   return (

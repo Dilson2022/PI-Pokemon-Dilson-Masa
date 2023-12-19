@@ -3,6 +3,21 @@ import axios from "axios";
 export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_POKEMON = "GET_POKEMON"
 export const GET_SEARCH_POKEMON = "GET_SEARCH_POKEMON"
+export const GET_ALL_TYPES = "GET_ALL_TYPES"
+
+
+
+export const getAllTypes = () =>{
+  return async function (dispatch) {
+    const apiData = await axios.get("http://localhost:3001/type")
+    console.log(apiData)
+    const types = apiData.data;
+    dispatch({
+      type: GET_ALL_TYPES,
+      payload: types
+    })
+  }
+}
 
 export const searchPokemon = (name) => {
   return async function (dispatch) {
