@@ -10,7 +10,7 @@ export const GET_ALL_TYPES = "GET_ALL_TYPES"
 export const getAllTypes = () =>{
   return async function (dispatch) {
     const apiData = await axios.get("http://localhost:3001/type")
-    console.log(apiData)
+    //console.log(apiData)
     const types = apiData.data;
     dispatch({
       type: GET_ALL_TYPES,

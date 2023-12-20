@@ -1,31 +1,66 @@
-.card{
-    border: 1px solid black;
-    width: fit-content;
-    height: fit-content;
-    border-radius: 10px;
-}
-.linkButton {
-    font-family: 'Arial', sans-serif;
-    font-size: 16px;
-    color: #101310;
-    background-color: transparent;
-    border: 2px solid transparent;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: color 0.3s, background-color 0.3s, border-color 0.3s;
-  }
+/* Card.module.css */
 
+.card {
+  border: 1px solid #ccc;
+  width: 200px; /* Puedes ajustar el ancho según tus necesidades */
+  height: 300px; /* Puedes ajustar la altura según tus necesidades */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05); /* Efecto de escala al pasar el ratón */
+}
+
+.card img {
+  width: 70%; /* La imagen ocupará el 100% del ancho de su contenedor */
+  height: 50%;
+  object-fit: cover;
+  border-bottom: 1px solid #ccc;
+}
+
+.card-content {
+  padding: 10px;
+}
+
+.linkButton {
+  display: block; /* Asegura que el botón ocupe todo el ancho de su contenedor */
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: 2px solid #007bff;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+  border-radius: 8px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.linkButton:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+
+
+
+
+
+
+
+/* 
   .btn {
     background-color: red;
     color: black;
     cursor: pointer;
    /* position: absolute; */
-   right: 0;
+   /* right: 0;
    padding: 10px;
    
-}
+} */ 
+  
