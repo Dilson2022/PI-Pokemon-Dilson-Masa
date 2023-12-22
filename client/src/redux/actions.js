@@ -4,8 +4,12 @@ export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_POKEMON = "GET_POKEMON"
 export const GET_SEARCH_POKEMON = "GET_SEARCH_POKEMON"
 export const GET_ALL_TYPES = "GET_ALL_TYPES"
+export const FILTER_POKEMONS = "FILTER_POKEMONS"
 
-
+export const filterPokemons = (selectedType) => ({
+  type: FILTER_POKEMONS,
+  payload: selectedType
+});
 
 export const getAllTypes = () =>{
   return async function (dispatch) {
