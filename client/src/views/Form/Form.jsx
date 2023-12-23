@@ -46,40 +46,46 @@ const Form = () => {
         }
 
 
-    return(
-        <form onSubmit={submitHandler}>
-           <div className={style.form}>
-            <label>Nombre:</label>
-            <input type="text" value={form.nombre} onChange={changeHandler} name="nombre"/>
-            </div> 
-
-            <div>
-            <label>Ataque:</label>
-            <input type="text"  value={form.ataque}  onChange={changeHandler} name="ataque"/>
-            </div> 
-
-            <div>
-            <label>Defensa:</label>
-            <input type="text"  value={form.defensa} onChange={changeHandler} name="defensa"/>
-            </div> 
-
-            <div>
-            <label>Velocidad:</label>
-            <input type="text"  value={form.velocidad}  onChange={changeHandler} name="velocidad"/>
-            </div> 
-
-            <div>
-            <label>Peso:</label>
-            <input type="text"  value={form.peso} onChange={changeHandler} name="peso"/>
-            </div> 
-
-            <div>
-            <label>Altura:</label>
-            <input type="text"  value={form.altura}  onChange={changeHandler} name="altura"/>
-            </div> 
-
-            <button type="submit">Crear Pokemon</button>
-        </form>
-    )
-}
-export default Form;
+        return (
+            <form onSubmit={submitHandler}>
+              <div className={style.form}>
+                <label>Nombre:</label>
+                <input type="text" value={form.nombre} onChange={changeHandler} name="nombre" />
+              </div>
+        
+              <div>
+                <label>Ataque:</label>
+                <input type="range" min="0" max="100" value={form.ataque} onChange={changeHandler} name="ataque" />
+                <span>{form.ataque}</span>
+              </div>
+        
+              <div>
+                <label>Defensa:</label>
+                <input type="range" min="0" max="100" value={form.defensa} onChange={changeHandler} name="defensa" />
+                <span>{form.defensa}</span>
+              </div>
+        
+              <div>
+                <label>Velocidad:</label>
+                <input type="range" min="0" max="100" value={form.velocidad} onChange={changeHandler} name="velocidad" />
+                <span>{form.velocidad}</span>
+              </div>
+        
+              <div>
+                <label>Peso:</label>
+                <input type="range" min="0" max="100" value={form.peso} onChange={changeHandler} name="peso" />
+                <span>{form.peso}</span>
+              </div>
+        
+              <div>
+                <label>Altura:</label>
+                <input type="range" min="0" max="100" value={form.altura} onChange={changeHandler} name="altura" />
+                <span>{form.altura}</span>
+              </div>
+        
+              <button type="submit">Crear Pokemon</button>
+            </form>
+          );
+        };
+        
+        export default Form;

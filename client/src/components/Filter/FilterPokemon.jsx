@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {filterPokemons} from "../../redux/actions"
+import style from "../Filter/Filter.module.css"
 
 const FilterPokemons = () => {
     const [state, setState] = useState("")
@@ -13,14 +14,14 @@ const FilterPokemons = () => {
       }
 
       return (
-        <div>
+        <div className={style.filter}>
           {/* <label htmlFor="filterPokemons">Selecciona un tipo</label> */}
           <select 
            id="filterPokemon"
            value={state}
            onChange={handlerFilterPokemon}
            >
-           <option value="">Filtrar</option>
+           <option value="">Todos</option>
            <option value="grass">Hierba</option>
            <option value="fire">Fuego</option>
            <option value="water">Agua</option>

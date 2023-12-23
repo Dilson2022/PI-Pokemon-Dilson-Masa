@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchPokemon } from "../../redux/actions";
+import style from "../SearchBar/SearchBar.module.css"
 
 const SearchBar = () => {
   const [state, setState] = useState("");
@@ -13,7 +14,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
+    <div className={style.SearchBar}>
       <input
         type="text"
         placeholder="Search Pokemon by name"

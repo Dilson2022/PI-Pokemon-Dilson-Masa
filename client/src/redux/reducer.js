@@ -1,4 +1,4 @@
-import {GET_POKEMONS, GET_POKEMON, GET_SEARCH_POKEMON, GET_ALL_TYPES, FILTER_POKEMONS} from "./actions";
+import {SET_PAGINATION, ORDENAR_POKEMONES, GET_POKEMONS, GET_POKEMON, GET_SEARCH_POKEMON, GET_ALL_TYPES, FILTER_POKEMONS} from "./actions";
 
 
 const initialState = {
@@ -6,9 +6,14 @@ const initialState = {
     pokemon:[],
     searchPokemon: [],
     getAllTypes:[],
-    filteredType: ""
+    filteredType: "",
+    pokemones: [],  
+    orden: {
+        critrio: "nombre",
+        ascendente: true,
+    },
+    currentPage: 0,
 };
-
 
 
 
@@ -24,6 +29,13 @@ const rootReducer=(state = initialState, action)=>{
                 return {...state, getAllTypes: action.payload}
             case FILTER_POKEMONS:
                 return {...state, filteredType: action.payload,}
+            case ORDENAR_POKEMONES:
+                return {...state, orden: {
+                    criterio: action.payload.criterio,
+                    ascendente: action.payload.ascendente
+                }}
+            case SET_PAGINATION:
+            return {...state, currentPage: action.payload.currentPage,}
         default:
             return {...state};
     }

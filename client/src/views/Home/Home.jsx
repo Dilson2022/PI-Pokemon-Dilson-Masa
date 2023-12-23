@@ -6,7 +6,8 @@ import SearchBar from "../../components/SearchBar/SearchBar"
 import Types from "../../components/Types/Types"
 //import {getAllTypes} from "../../redux/actions"
 import FilterPokemons from "../../components/Filter/FilterPokemon";
-
+import PokemonList from "../../components/PokemonList/PokemonList"
+import Pagination from "../../components/Pagination/Pagination";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -18,6 +19,8 @@ const Home = () => {
 
     return(
         <div>
+            <Pagination/>
+            <PokemonList/>
            < FilterPokemons/>
             <Types/>
              <SearchBar/> 

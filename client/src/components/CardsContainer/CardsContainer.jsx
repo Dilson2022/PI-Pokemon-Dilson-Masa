@@ -1,23 +1,38 @@
-import Card from "../Card/Card";
+import React, { useState, useEffect } from "react";
 import style from "./CardsContainer.module.css";
+import Card from "../Card/Card";
 import { useSelector } from "react-redux";
-
 
 const CardsContainer = () => {
   const pokemons = useSelector((state) => state.pokemons);
   const searchPokemon = useSelector((state) => state.searchPokemon);
-  const filteredType = useSelector((state)=>state.filteredType);
+  const filteredType = useSelector((state) => state.filteredType);
+  const orden = useSelector((state) => state.orden);
 
-  // Función para filtrar los pokémons según el tipo seleccionado
+  const [orderedPokemons, setOrderedPokemons] = useState([]);
+
   const filterPokemonsByType = (pokemon) => {
-    //console.log('Valor de pokemon.tipos:', pokemon.tipos);
     return (
-      filteredType === "" || // Si no hay tipo filtrado, mostrar todos los pokémons
-      (pokemon.tipos && pokemon.tipos.includes(filteredType)) // Verifica si pokemon.tipos está definido antes de usar includes
+      filteredType === "" ||
+      (pokemon.tipos && pokemon.tipos.includes(filteredType))
     );
   };
 
- 
+  useEffect(() => {
+    const pokemonsFilteredByType = pokemons.filter(filterPokemonsByType);
+
+    const pokemonsOrdered = [...pokemonsFilteredByType].sort((a, b) => {
+      const factorOrden = orden.ascendente ? 1 : -1;
+      if (orden.criterio === "nombre") {
+        return factorOrden * a.nombre.localeCompare(b.nombre);
+      } else if (orden.criterio === "ataque") {
+        return factorOrden * (a.ataque - b.ataque);
+      }
+      return 0;
+    });
+
+    setOrderedPokemons(pokemonsOrdered);
+  }, [pokemons, filteredType, orden ]);
 
   return (
     <div className={style.CardsContainer}>
@@ -29,7 +44,6 @@ const CardsContainer = () => {
               nombre={pokemon.nombre}
               imagen={pokemon.img}
               tipos={pokemon.tipos}
-              //vida={pokemon.vida}
               ataque={pokemon.ataque}
               defensa={pokemon.defensa}
               velocidad={pokemon.velocidad}
@@ -37,17 +51,13 @@ const CardsContainer = () => {
               peso={pokemon.peso}
             />
           ))
-        : pokemons
-
-        .filter(filterPokemonsByType)
-        .map((pokemon) => (
+        : orderedPokemons.map((pokemon) => (
             <Card
               key={pokemon.id}
               id={pokemon.id}
               nombre={pokemon.nombre}
               imagen={pokemon.img}
               tipos={pokemon.tipos}
-              //vida={pokemon.vida}
               ataque={pokemon.ataque}
               defensa={pokemon.defensa}
               velocidad={pokemon.velocidad}
