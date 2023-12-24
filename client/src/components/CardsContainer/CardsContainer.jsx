@@ -8,8 +8,11 @@ const CardsContainer = () => {
   const searchPokemon = useSelector((state) => state.searchPokemon);
   const filteredType = useSelector((state) => state.filteredType);
   const orden = useSelector((state) => state.orden);
+  const currentPage = useSelector((state) => state.currentPage);
+  const pokemonsPerPage = 12; // Número de pokemons por página
 
   const [orderedPokemons, setOrderedPokemons] = useState([]);
+  
 
   const filterPokemonsByType = (pokemon) => {
     return (
@@ -19,6 +22,7 @@ const CardsContainer = () => {
   };
 
   useEffect(() => {
+    
     const pokemonsFilteredByType = pokemons.filter(filterPokemonsByType);
 
     const pokemonsOrdered = [...pokemonsFilteredByType].sort((a, b) => {
@@ -33,6 +37,11 @@ const CardsContainer = () => {
 
     setOrderedPokemons(pokemonsOrdered);
   }, [pokemons, filteredType, orden ]);
+
+  const indexOfLastPokemon = currentPage * pokemonsPerPage;
+  const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
+  const currentPokemons = orderedPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
+
 
   return (
     <div className={style.CardsContainer}>
@@ -51,7 +60,7 @@ const CardsContainer = () => {
               peso={pokemon.peso}
             />
           ))
-        : orderedPokemons.map((pokemon) => (
+        : currentPokemons.map((pokemon) => (
             <Card
               key={pokemon.id}
               id={pokemon.id}

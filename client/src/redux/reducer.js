@@ -12,7 +12,8 @@ const initialState = {
         critrio: "nombre",
         ascendente: true,
     },
-    currentPage: 0,
+    orderedPokemons: [],
+    currentPage: 1,
 };
 
 
