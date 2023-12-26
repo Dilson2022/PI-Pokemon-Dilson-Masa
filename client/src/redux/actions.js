@@ -18,9 +18,9 @@ export const ordenarPokemones = (criterio, ascendente) => ({
   payload: {criterio, ascendente}
 });
 
-export const filterPokemons = (selectedType) => ({
+export const filterPokemons = (type, origin) => ({
   type: FILTER_POKEMONS,
-  payload: selectedType
+  payload: {type, origin},
 });
 
 export const getAllTypes = () =>{

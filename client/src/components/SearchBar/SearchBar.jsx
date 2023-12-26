@@ -21,7 +21,7 @@ const SearchBar = () => {
         value={state}
         onChange={(event) => setState(event.target.value)}
       />
-      <button onClick={handleSearch}>Search</button>
+      <button onClick={handleSearch}>Buscar</button>
     </div>
   );
 };

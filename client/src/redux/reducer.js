@@ -6,10 +6,11 @@ const initialState = {
     pokemon:[],
     searchPokemon: [],
     getAllTypes:[],
-    filteredType: "",
+    type: "",
+    origin: "",
     pokemones: [],  
     orden: {
-        critrio: "nombre",
+        criterio: "nombre",
         ascendente: true,
     },
     orderedPokemons: [],
@@ -29,7 +30,9 @@ const rootReducer=(state = initialState, action)=>{
             case  GET_ALL_TYPES:
                 return {...state, getAllTypes: action.payload}
             case FILTER_POKEMONS:
-                return {...state, filteredType: action.payload,}
+                return {...state, 
+                    type: action.payload.type, 
+                    origin:  action.payload.origin,}
             case ORDENAR_POKEMONES:
                 return {...state, orden: {
                     criterio: action.payload.criterio,

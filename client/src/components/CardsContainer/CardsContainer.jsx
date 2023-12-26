@@ -6,26 +6,28 @@ import { useSelector } from "react-redux";
 const CardsContainer = () => {
   const pokemons = useSelector((state) => state.pokemons);
   const searchPokemon = useSelector((state) => state.searchPokemon);
-  const filteredType = useSelector((state) => state.filteredType);
+  const type = useSelector((state) => state.type);
+  const origin = useSelector((state) => state.origin);
   const orden = useSelector((state) => state.orden);
   const currentPage = useSelector((state) => state.currentPage);
   const pokemonsPerPage = 12; // Número de pokemons por página
 
   const [orderedPokemons, setOrderedPokemons] = useState([]);
-  
 
-  const filterPokemonsByType = (pokemon) => {
-    return (
-      filteredType === "" ||
-      (pokemon.tipos && pokemon.tipos.includes(filteredType))
-    );
+  const filterPokemonsByTypeAndOrigin = (pokemon) => {
+    const typeCondition = type === "" || (pokemon.tipos && pokemon.tipos.includes(type));
+    const originCondition = origin === "" || pokemon.origin === origin;
+    
+    return typeCondition && originCondition;
   };
 
-  useEffect(() => {
-    
-    const pokemonsFilteredByType = pokemons.filter(filterPokemonsByType);
 
-    const pokemonsOrdered = [...pokemonsFilteredByType].sort((a, b) => {
+  useEffect(() => {
+    const pokemonsFilteredByTypeAndOrigin = pokemons.filter(
+      filterPokemonsByTypeAndOrigin
+    );
+
+    const pokemonsOrdered = [...pokemonsFilteredByTypeAndOrigin].sort((a, b) => {
       const factorOrden = orden.ascendente ? 1 : -1;
       if (orden.criterio === "nombre") {
         return factorOrden * a.nombre.localeCompare(b.nombre);
@@ -36,12 +38,14 @@ const CardsContainer = () => {
     });
 
     setOrderedPokemons(pokemonsOrdered);
-  }, [pokemons, filteredType, orden ]);
+  }, [pokemons, type, origin, orden]);
 
   const indexOfLastPokemon = currentPage * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
-  const currentPokemons = orderedPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
-
+  const currentPokemons = orderedPokemons.slice(
+    indexOfFirstPokemon,
+    indexOfLastPokemon
+  );
 
   return (
     <div className={style.CardsContainer}>
