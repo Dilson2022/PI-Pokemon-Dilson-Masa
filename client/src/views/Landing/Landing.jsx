@@ -1,7 +1,10 @@
+import style from "./Landing.module.css"
+
 const Landing = () => {
     return(
-        <div>
-            <h1>Esta es la vista de landing</h1>
+        <div className={style.landingContainer}>
+            <h1>Proyecto Pokemon</h1>
+            <a href="/home"className={style.ingresarBtn} >Ingresar</a>
         </div>
     )
 }

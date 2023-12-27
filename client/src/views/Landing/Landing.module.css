@@ -1,0 +1,27 @@
+.landingContainer {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: #3498db;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.ingresarBtn {
+    padding: 10px 20px;
+    font-size: 1.5em;
+    text-decoration: none;
+    color: white;
+    background-color: #3498db;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.ingresarBtn:hover {
+    background-color: #2980b9;
+}
