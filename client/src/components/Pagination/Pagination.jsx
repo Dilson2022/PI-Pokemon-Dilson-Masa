@@ -10,6 +10,10 @@ const Pagination = () => {
     dispatch(setPagination(newPage));
   };
 
+  const handleSetPagination = () => {
+    dispatch(setPagination(-1));
+  }
+  
   const totalPages = 5; // Número total de páginas (puedes ajustarlo según tu necesidad)
 
   const renderPageButtons = () => {
@@ -28,7 +32,12 @@ const Pagination = () => {
     return buttons;
   };
 
-  return <div>{renderPageButtons()}</div>;
+  return (
+    <div> 
+    <div>{renderPageButtons()}</div>
+    <button onClick = {handleSetPagination}>Mostrar Todos</button>
+    </div>
+    )
 };
 
 export default Pagination;

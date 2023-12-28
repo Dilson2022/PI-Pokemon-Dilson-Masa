@@ -9,18 +9,28 @@ const CardsContainer = () => {
   const type = useSelector((state) => state.type);
   const origin = useSelector((state) => state.origin);
   const orden = useSelector((state) => state.orden);
-  const currentPage = useSelector((state) => state.currentPage);
-  const pokemonsPerPage = 12; // Número de pokemons por página
+  const paginaActual = useSelector((state) => state.currentPage);
+  const pokemonsPorPagina = 12; // Número de pokemons por página
 
   const [orderedPokemons, setOrderedPokemons] = useState([]);
 
   const filterPokemonsByTypeAndOrigin = (pokemon) => {
-    const typeCondition = type === "" || (pokemon.tipos && pokemon.tipos.includes(type));
-    const originCondition = origin === "" || pokemon.origin === origin;
-    
+    const typeCondition = !type || (pokemon.tipos && pokemon.tipos.includes(type));
+    const originCondition = !origin || pokemon.origin === origin;
+  
+    const isAPIMode = origin === "API";
+    const isCreatedMode = origin === "creados";
+  
+    if (isAPIMode && pokemon.origin !== "API") {
+      return false;
+    }
+  
+    if (isCreatedMode && pokemon.origin !== "creados") {
+      return false;
+    }
+  
     return typeCondition && originCondition;
   };
-
 
   useEffect(() => {
     const pokemonsFilteredByTypeAndOrigin = pokemons.filter(
@@ -40,11 +50,12 @@ const CardsContainer = () => {
     setOrderedPokemons(pokemonsOrdered);
   }, [pokemons, type, origin, orden]);
 
-  const indexOfLastPokemon = currentPage * pokemonsPerPage;
-  const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
+  const mostrarTodos = paginaActual === -1;
+  const comenzar = mostrarTodos ? 0 : (paginaActual - 1) * pokemonsPorPagina;
+  const final = mostrarTodos ? orderedPokemons.length : comenzar + pokemonsPorPagina;
   const currentPokemons = orderedPokemons.slice(
-    indexOfFirstPokemon,
-    indexOfLastPokemon
+    comenzar,
+    final
   );
 
   return (

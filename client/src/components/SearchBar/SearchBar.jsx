@@ -17,7 +17,7 @@ const SearchBar = () => {
     <div className={style.SearchBar}>
       <input
         type="text"
-        placeholder="Search Pokemon by name"
+        placeholder="Buscar pokemon por nombre"
         value={state}
         onChange={(event) => setState(event.target.value)}
       />
