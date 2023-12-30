@@ -1,9 +1,6 @@
 const { Pokemon } = require("../db");
 const axios = require("axios");
 
-// const axiosInstance = axios.create({
-//   timeout: 60000,
-// });
 
 const searchPokemonName = async (name) => {
   const databasePokemon = await Pokemon.findAll({ where: { nombre: name } });
@@ -45,11 +42,11 @@ const getAllPokemon = async () => {
   const databasePokemon = await Pokemon.findAll();
   //console.log(databasePokemon)
 
-  const apiPokemon = (await axios.get("https://pokeapi.co/api/v2/pokemon/")).data.results;
+  const apiPokemon = (await axios.get("https://pokeapi.co/api/v2/pokemon?limit=100")).data.results;
   
   const results = [];
   for (const pokemon of databasePokemon) {
-    results.push(pokemon);
+    results.push({...pokemon, origin: "creados"});
   }
 
     for (const pokemon of apiPokemon) {
@@ -72,7 +69,7 @@ const getAllPokemon = async () => {
         altura: infoFromApi.height,
         
       };
-      results.push(extraerData);
+      results.push({...extraerData, origin: "API"});
     }
     return results;
   };
