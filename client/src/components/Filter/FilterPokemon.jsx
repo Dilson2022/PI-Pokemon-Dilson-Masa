@@ -12,11 +12,12 @@ const FilterPokemons = () => {
         const { name, value } = event.target;
         if (name === "type" ) {
           setType(value);
+          dispatch(filterPokemons(value, origin));
+
         } else if (name === "origin") {
           setOrigin(value);
+          dispatch(filterPokemons(type, value));;
         }
-        //console.log("Origin:", value);
-        dispatch(filterPokemons(type, origin));
        
       }
 

@@ -5,6 +5,7 @@ import axios from "axios";
 const Form = () => {
 
     const [form, setForm] = useState({
+        // tipo:"",
         nombre:"",
         ataque:"",
         defensa:"",
@@ -82,6 +83,12 @@ const Form = () => {
                 <input type="range" min="0" max="100" value={form.altura} onChange={changeHandler} name="altura" />
                 <span>{form.altura}</span>
               </div>
+
+              {/* <div>
+                <label>Tipo:</label>
+                <input type="range" min="0" max="100" value={form.tipo} onChange={changeHandler} name="tipo" />
+                <span>{form.tipo}</span>
+              </div> */}
         
               <button type="submit">Crear Pokemon</button>
             </form>

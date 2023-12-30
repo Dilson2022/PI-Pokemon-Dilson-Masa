@@ -40,7 +40,9 @@ const CardsContainer = () => {
     const pokemonsOrdered = [...pokemonsFilteredByTypeAndOrigin].sort((a, b) => {
       const factorOrden = orden.ascendente ? 1 : -1;
       if (orden.criterio === "nombre") {
-        return factorOrden * a.nombre.localeCompare(b.nombre);
+        const aNombre = a.nombre ?? "";
+        const bNombre = b.nombre ?? "";
+        return factorOrden * aNombre.localeCompare(bNombre);
       } else if (orden.criterio === "ataque") {
         return factorOrden * (a.ataque - b.ataque);
       }
