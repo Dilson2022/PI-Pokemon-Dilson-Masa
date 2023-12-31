@@ -10,14 +10,18 @@ const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const pokemon = useSelector((state) => state.pokemon);
+ // console.log(pokemon);
 
   useEffect(() => {
     dispatch(getPokemon(id));
   }, [dispatch, id]);
 
+  //console.log('Estado actual:', pokemon);
+
   if (!pokemon) {
     return <div className="detail-not-found">Pokemon no encontrado</div>;
   }
+  
   return (
     <div className={style.detailContainer}>
       <p className={style.detailTitle}>ID: {id}</p>

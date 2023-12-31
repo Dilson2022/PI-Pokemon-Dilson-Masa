@@ -1,7 +1,24 @@
-.Container{
+/* NavBar.module.css */
+
+.Container {
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
-   border-radius: 15px;
-   border: 1px solid black;
-}
+    align-items: center;
+    background: linear-gradient(to right, #3498db, #2c3e50); /* Gradiente de colores */
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  }
+  
+  .Container a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .Container a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo semi-transparente al pasar el ratón */
+  }
+  

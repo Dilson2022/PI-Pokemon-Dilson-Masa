@@ -22,6 +22,7 @@ const SearchBar = () => {
         onChange={(event) => setState(event.target.value)}
       />
       <button onClick={handleSearch}>Buscar</button>
+      
     </div>
   );
 };

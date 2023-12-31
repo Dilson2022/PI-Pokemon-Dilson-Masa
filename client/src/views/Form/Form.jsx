@@ -5,7 +5,7 @@ import axios from "axios";
 const Form = () => {
 
     const [form, setForm] = useState({
-        // tipo:"",
+         tipo:"",
         nombre:"",
         ataque:"",
         defensa:"",
@@ -42,8 +42,12 @@ const Form = () => {
     const submitHandler = (event) => {
         event.preventDefault()
          axios.post("http://localhost:3001/pokemon",form)
-        .then(res=>alert(res))
-        .catch(err=>alert(err))
+         //console.log(form)
+         .then((res) => {
+          console.log(res); // Registrar la respuesta del servidor
+          alert("Pokemon creado exitosamente");
+        })
+        .catch(err=>alert("Error al crear pokemon"));
         }
 
 
@@ -84,11 +88,19 @@ const Form = () => {
                 <span>{form.altura}</span>
               </div>
 
-              {/* <div>
+              <div>
                 <label>Tipo:</label>
-                <input type="range" min="0" max="100" value={form.tipo} onChange={changeHandler} name="tipo" />
+                <select name="tipo" onChange={changeHandler}>
+                <option value="grass">Hierba</option>
+                <option value="fire">Fuego</option>
+                <option value="water">Agua</option>
+                <option value="bug">Bicho</option>
+                <option value="normal">Normal</option>
+               </select>
                 <span>{form.tipo}</span>
-              </div> */}
+
+              </div>
+ 
         
               <button type="submit">Crear Pokemon</button>
             </form>
