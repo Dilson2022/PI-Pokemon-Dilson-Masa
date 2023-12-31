@@ -46,7 +46,7 @@ const getAllPokemon = async () => {
   
   const results = [];
   for (const pokemon of databasePokemon) {
-    results.push({...pokemon, origin: "creados"});
+    results.push({...pokemon.dataValues, origin: "creados"});
   }
 
     for (const pokemon of apiPokemon) {
@@ -82,8 +82,21 @@ const getAllPokemon = async () => {
 const getPokemonId = async (id) => {
   if (isNaN(id)) {
     const pokemon = await Pokemon.findOne({ where: { id } });
-    return pokemon;
+    return {
+      id: pokemon.id,
+      name: pokemon.nombre,
+      img: pokemon.img,
+      attack: pokemon.ataque,
+      defense: pokemon.defensa,
+      speed: pokemon.velocidad,
+      height: pokemon.altura,
+      weight: pokemon.peso,
+      types: pokemon.tipo,
+      //vida: res.stats[0].base_stat,
+      
+    };
   }
+
   const res = (await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)).data;
   return {
     id: res.id,
@@ -105,8 +118,8 @@ const getPokemonId = async (id) => {
  
 };
 
-const createPokemon = async (id, nombre, vida, ataque, defensa, velocidad, altura, peso) =>
-  await Pokemon.create({ id, nombre, vida, ataque, defensa, velocidad, altura, peso,
+const createPokemon = async (id, nombre, tipo, ataque, defensa,  velocidad, altura, peso) =>
+  await Pokemon.create({ id, nombre, tipo, ataque, defensa,  velocidad, altura, peso,
   });
 
   
