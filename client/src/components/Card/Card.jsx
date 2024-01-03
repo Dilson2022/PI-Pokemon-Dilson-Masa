@@ -2,7 +2,7 @@ import style from "./Card.module.css"
 import { Link } from "react-router-dom" 
 
 const Card = (props) => {
-
+  //console.log('Tipos en Card:', props.tipos);
   // const onClose = (id) =>{
   //   console.log(`Cerrando elemento con ID: ${id}`)
   // }

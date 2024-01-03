@@ -3,18 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPagination } from '../../redux/actions';
 
 const Pagination = () => {
-  const currentPage = useSelector((state) => state.pagination);
+  const paginaActual = useSelector((state) => state.pagination);
   const dispatch = useDispatch();
 
-  const handlePageChange = (newPage) => {
-    dispatch(setPagination(newPage));
+  const handlePageChange = (nuevaPagina) => {
+    dispatch(setPagination(nuevaPagina));
   };
 
   const handleSetPagination = () => {
     dispatch(setPagination(-1));
   }
   
-  const totalPages = 5; // Número total de páginas (puedes ajustarlo según tu necesidad)
+  const totalPages = 10; // Número total de páginas 
 
   const renderPageButtons = () => {
     const buttons = [];
@@ -23,7 +23,7 @@ const Pagination = () => {
         <button
           key={i}
           onClick={() => handlePageChange(i)}
-          className={i === currentPage ? 'active' : ''}
+          className={i === paginaActual ? 'active' : ''}
         >
           {i}
         </button>

@@ -14,7 +14,7 @@ const initialState = {
         ascendente: true,
     },
     orderedPokemons: [],
-    currentPage: 1,
+    paginaActual: -1,
 };
 
 

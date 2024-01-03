@@ -9,23 +9,26 @@ const CardsContainer = () => {
   const type = useSelector((state) => state.type);
   const origin = useSelector((state) => state.origin);
   const orden = useSelector((state) => state.orden);
-  const paginaActual = useSelector((state) => state.currentPage);
+  const paginaActual = useSelector((state) => state.paginaActual);
   const pokemonsPorPagina = 12; // Número de pokemons por página
 
   const [orderedPokemons, setOrderedPokemons] = useState([]);
 
   const filterPokemonsByTypeAndOrigin = (pokemon) => {
     const typeCondition = !type || (pokemon.tipos && pokemon.tipos.includes(type));
+    //console.log(typeCondition);
     const originCondition = !origin || pokemon.origin === origin;
+    //console.log(originCondition);
+    const originAPI = origin === "API";
+    const originCreado = origin === "creados";
   
-    const isAPIMode = origin === "API";
-    const isCreatedMode = origin === "creados";
-  
-    if (isAPIMode && pokemon.origin !== "API") {
+    if (originAPI && pokemon.origin !== "API") {
+      //console.log("Origin API ");
       return false;
     }
   
-    if (isCreatedMode && pokemon.origin !== "creados") {
+    if (originCreado && pokemon.origin !== "creados") {
+      //console.log("Origin creados")
       return false;
     }
   

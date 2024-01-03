@@ -36,6 +36,11 @@ const FilterPokemons = () => {
         <option value="water">Agua</option>
         <option value="bug">Bicho</option>
         <option value="normal">Normal</option>
+        <option value="electric">Electrico</option>
+        <option value="poison">Veneno</option>
+        <option value="flying">Volador</option>
+       
+       
            </select>
 
            <label htmlFor="filterOrigin">Origen</label>

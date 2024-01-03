@@ -5,23 +5,26 @@ import axios from "axios";
 const Form = () => {
 
     const [form, setForm] = useState({
-         tipo:"",
+         tipos:"",
         nombre:"",
         ataque:"",
         defensa:"",
         velocidad:"",
         peso:"",
-        altura:""
+        altura:"",
+        imagen:"",
+        vida:""
     })
     // const [errors, setErrors] = useState({
     //     nombre:"",
     //     ataque:"",
     //     defensa:"",
-    //     velocidad:"",
+    //     velocidad:""
     //     peso:"",
     //     altura:""
     // })
     const changeHandler = (event) => {
+      
         const property = event.target.name;
         const value = event.target.value;
 
@@ -44,7 +47,7 @@ const Form = () => {
          axios.post("http://localhost:3001/pokemon",form)
          //console.log(form)
          .then((res) => {
-          console.log(res); // Registrar la respuesta del servidor
+          //console.log(res); // Registrar la respuesta del servidor
           alert("Pokemon creado exitosamente");
         })
         .catch(err=>alert("Error al crear pokemon"));
@@ -62,6 +65,12 @@ const Form = () => {
                 <label>Ataque:</label>
                 <input type="range" min="0" max="100" value={form.ataque} onChange={changeHandler} name="ataque" />
                 <span>{form.ataque}</span>
+              </div>
+
+              <div>
+                <label>Vida:</label>
+                <input type="range" min="0" max="100" value={form.vida} onChange={changeHandler} name="vida" />
+                <span>{form.vida}</span>
               </div>
         
               <div>
@@ -89,6 +98,12 @@ const Form = () => {
               </div>
 
               <div>
+                <label>Vida:</label>
+                <input type="range" min="0" max="100" value={form.vida} onChange={changeHandler} name="vida" />
+                <span>{form.vida}</span>
+              </div>
+
+              <div>
                 <label>Tipo:</label>
                 <select name="tipo" onChange={changeHandler}>
                 <option value="grass">Hierba</option>
@@ -96,8 +111,26 @@ const Form = () => {
                 <option value="water">Agua</option>
                 <option value="bug">Bicho</option>
                 <option value="normal">Normal</option>
+                <option value="frutas">Frutas</option>
                </select>
-                <span>{form.tipo}</span>
+                <span>{form.tipos}</span>
+
+                <div>
+          <label>Imagen (URL):</label>
+          <input
+            type="text"
+            value={form.imagen}
+            onChange={changeHandler}
+            name="imagen"
+          />
+          {form.imagen && (
+            <img
+              src={form.imagen}
+              alt="Imagen seleccionada"
+              style={{ width: '100px', height: '100px', margin: '10px' }}
+            />
+          )}
+        </div>
 
               </div>
  
