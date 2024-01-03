@@ -38,6 +38,9 @@ module.exports = (sequelize) => {
     },
     peso: {
       type: DataTypes.FLOAT,
+    },
+    tipo: {
+      type: DataTypes.STRING,
     }
   }, {
     timestamps: false,

@@ -1,7 +1,6 @@
 const { Pokemon } = require("../db");
 const axios = require("axios");
 
-
 const searchPokemonName = async (name) => {
   const databasePokemon = await Pokemon.findAll({ where: { nombre: name } });
 
@@ -10,7 +9,6 @@ const searchPokemonName = async (name) => {
     const apiPokemonUrl = `https://pokeapi.co/api/v2/pokemon/${name}`;
     const result = await axios.get(apiPokemonUrl);
     const apiPokemon = result.data;
-   
 
     // Extrae los atributos deseados
     const extraerData = {
@@ -32,68 +30,62 @@ const searchPokemonName = async (name) => {
   }
 };
 
-
-    
-    
-
-
-
 const getAllPokemon = async () => {
   const databasePokemon = await Pokemon.findAll();
   //console.log(databasePokemon)
 
-  const apiPokemon = (await axios.get("https://pokeapi.co/api/v2/pokemon?limit=100")).data.results;
-  
+  const apiPokemon = (
+    await axios.get("https://pokeapi.co/api/v2/pokemon?limit=100")
+  ).data.results;
+
   const results = [];
   for (const pokemon of databasePokemon) {
-    results.push({...pokemon.dataValues, origin: "creados"});
+    results.push({ ...pokemon.dataValues, origin: "creados" });
   }
 
-    for (const pokemon of apiPokemon) {
-      const url = pokemon.url; // Extraigo la url del pokemon actual de la lista
-  
-      // Realiza una llamada a la API a la URL del Pokémon
-      const response = await axios.get(url);
-      
-      const infoFromApi = response.data;
-      // Extrae los atributos deseados
-      const extraerData = {
-        id: infoFromApi.id,
-        nombre: infoFromApi.name,
-        tipos: infoFromApi.types.map((t) => t.type.name),
-        img: infoFromApi.sprites.other["official-artwork"].front_default,
-        ataque: infoFromApi.stats[1].base_stat,
-        defensa: infoFromApi.stats[2].base_stat,
-        velocidad: infoFromApi.stats[5].base_stat,
-        peso: infoFromApi.weight,
-        altura: infoFromApi.height,
-        
-      };
-      results.push({...extraerData, origin: "API"});
-    }
-    return results;
-  };
-  
-  
-  
- 
+  for (const pokemon of apiPokemon) {
+    const url = pokemon.url; // Extraigo la url del pokemon actual de la lista
 
+    // Realiza una llamada a la API a la URL del Pokémon
+    const response = await axios.get(url);
+
+    const infoFromApi = response.data;
+    // Extrae los atributos deseados
+    const extraerData = {
+      id: infoFromApi.id,
+      nombre: infoFromApi.name,
+      tipos: infoFromApi.types.map((t) => t.type.name),
+      img: infoFromApi.sprites.other["official-artwork"].front_default,
+      ataque: infoFromApi.stats[1].base_stat,
+      defensa: infoFromApi.stats[2].base_stat,
+      velocidad: infoFromApi.stats[5].base_stat,
+      peso: infoFromApi.weight,
+      altura: infoFromApi.height,
+    };
+    results.push({ ...extraerData, origin: "API" });
+  }
+  return results;
+};
 
 const getPokemonId = async (id) => {
   if (isNaN(id)) {
     const pokemon = await Pokemon.findOne({ where: { id } });
+
     return {
       id: pokemon.id,
       name: pokemon.nombre,
-      img: pokemon.img,
+      img: pokemon.imagen,
       attack: pokemon.ataque,
       defense: pokemon.defensa,
       speed: pokemon.velocidad,
       height: pokemon.altura,
       weight: pokemon.peso,
-      types: pokemon.tipo,
-      //vida: res.stats[0].base_stat,
-      
+      types: [
+        {
+          name: pokemon.tipo,
+        },
+      ],
+      vida: pokemon.vida,
     };
   }
 
@@ -114,15 +106,30 @@ const getPokemonId = async (id) => {
       };
     }),
   };
-
- 
 };
 
-const createPokemon = async (id, nombre, tipo, ataque, defensa,  velocidad, altura, peso) =>
-  await Pokemon.create({ id, nombre, tipo, ataque, defensa,  velocidad, altura, peso,
+const createPokemon = async (
+  id,
+  imagen,
+  nombre,
+  tipo,
+  ataque,
+  defensa,
+  velocidad,
+  altura,
+  peso
+) =>
+  await Pokemon.create({
+    id,
+    imagen,
+    nombre,
+    tipo,
+    ataque,
+    defensa,
+    velocidad,
+    altura,
+    peso,
   });
-
-  
 
 module.exports = {
   createPokemon,
