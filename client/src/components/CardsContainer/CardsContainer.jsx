@@ -74,7 +74,7 @@ const CardsContainer = () => {
               key={pokemon.id}
               id={pokemon.id}
               nombre={pokemon.nombre}
-              imagen={pokemon.img}
+              imagen={pokemon.imagen}
               tipos={pokemon.tipos}
               ataque={pokemon.ataque}
               defensa={pokemon.defensa}
@@ -89,7 +89,7 @@ const CardsContainer = () => {
               key={pokemon.id}
               id={pokemon.id}
               nombre={pokemon.nombre}
-              imagen={pokemon.img}
+              imagen={pokemon.imagen}
               tipos={pokemon.tipos}
               ataque={pokemon.ataque}
               defensa={pokemon.defensa}

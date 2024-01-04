@@ -32,7 +32,7 @@ const Form = () => {
       "vida",
       "imagen",
       "peso",
-      "tipos",
+      
       "ataque",
       "velocidad",
       "defensa",
@@ -153,6 +153,7 @@ const Form = () => {
           <option value="bug">Bicho</option>
           <option value="normal">Normal</option>
           <option value="frutas">Frutas</option>
+          <option value="animal">Animal</option>
         </select>
         <span>{form.tipos}</span>
 
