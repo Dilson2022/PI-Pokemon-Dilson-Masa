@@ -35,7 +35,7 @@ const getAllPokemon = async () => {
   //console.log(databasePokemon)
 
   const apiPokemon = (
-    await axios.get("https://pokeapi.co/api/v2/pokemon?limit=100")
+    await axios.get("https://pokeapi.co/api/v2/pokemon?limit=50")
   ).data.results;
 
   const results = [];
