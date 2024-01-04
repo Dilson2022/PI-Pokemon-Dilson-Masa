@@ -1,4 +1,4 @@
-import {SET_PAGINATION, ORDENAR_POKEMONES, GET_POKEMONS, GET_POKEMON, GET_SEARCH_POKEMON, GET_ALL_TYPES, FILTER_POKEMONS} from "./actions";
+import {SET_PAGINATION, ORDENAR_POKEMONES, GET_POKEMONS, GET_POKEMON, GET_SEARCH_POKEMON, GET_ALL_TYPES, FILTER_POKEMONS, ELIMINAR_POKEMON} from "./actions";
 
 
 const initialState = {
@@ -8,13 +8,13 @@ const initialState = {
     getAllTypes:[],
     type: "",
     origin: "",
-    pokemones: [],  
+    // pokemones: [],  
     orden: {
         criterio: "nombre",
         ascendente: true,
     },
-    orderedPokemons: [],
-    paginaActual: -1,
+    // orderedPokemons: [],
+    currentPage: -1,
 };
 
 
@@ -40,6 +40,7 @@ const rootReducer=(state = initialState, action)=>{
                 }}
             case SET_PAGINATION:
             return {...state, currentPage: action.payload.currentPage,}
+            
         default:
             return {...state};
     }

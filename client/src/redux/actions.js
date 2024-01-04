@@ -8,6 +8,10 @@ export const FILTER_POKEMONS = "FILTER_POKEMONS"
 export const ORDENAR_POKEMONES = "ORDENAR_POKEMONES";
 export const SET_PAGINATION = 'SET_PAGINATION';
 
+
+
+
+
 export const setPagination = (currentPage) => ({
   type: SET_PAGINATION,
   payload: {currentPage},

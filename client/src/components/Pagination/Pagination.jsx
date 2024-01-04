@@ -14,7 +14,7 @@ const Pagination = () => {
     dispatch(setPagination(-1));
   }
   
-  const totalPages = 10; // Número total de páginas 
+  const totalPages = 4; // Número total de páginas 
 
   const renderPageButtons = () => {
     const buttons = [];

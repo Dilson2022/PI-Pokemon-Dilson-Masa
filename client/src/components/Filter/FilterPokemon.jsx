@@ -43,7 +43,7 @@ const FilterPokemons = () => {
        
            </select>
 
-           <label htmlFor="filterOrigin">Origen</label>
+           <label htmlFor="filterOrigin">Origen:</label>
            <select 
            id="filterOrigin"
            name="origin"

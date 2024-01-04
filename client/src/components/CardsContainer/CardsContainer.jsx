@@ -9,39 +9,43 @@ const CardsContainer = () => {
   const type = useSelector((state) => state.type);
   const origin = useSelector((state) => state.origin);
   const orden = useSelector((state) => state.orden);
-  const paginaActual = useSelector((state) => state.paginaActual);
+  const paginaActual = useSelector((state) => state.currentPage);
   const pokemonsPorPagina = 12; // Número de pokemons por página
+  
 
   const [orderedPokemons, setOrderedPokemons] = useState([]);
+  
 
   const filterPokemonsByTypeAndOrigin = (pokemon) => {
-    const typeCondition = !type || (pokemon.tipos && pokemon.tipos.includes(type));
+    const typeCondition =
+      !type || (pokemon.tipos && pokemon.tipos.includes(type));
     //console.log(typeCondition);
     const originCondition = !origin || pokemon.origin === origin;
     //console.log(originCondition);
     const originAPI = origin === "API";
     const originCreado = origin === "creados";
-  
+
     if (originAPI && pokemon.origin !== "API") {
       //console.log("Origin API ");
       return false;
     }
-  
+
     if (originCreado && pokemon.origin !== "creados") {
       //console.log("Origin creados")
       return false;
     }
-  
+
     return typeCondition && originCondition;
   };
 
   useEffect(() => {
-    const pokemonsFilteredByTypeAndOrigin = pokemons.filter(
-      filterPokemonsByTypeAndOrigin
-    );
-
+    // Filtro por tipo y por origen
+    const pokemonsFilteredByTypeAndOrigin = pokemons.filter(filterPokemonsByTypeAndOrigin);
+  
+    // Ordeno los pokemones 
     const pokemonsOrdered = [...pokemonsFilteredByTypeAndOrigin].sort((a, b) => {
       const factorOrden = orden.ascendente ? 1 : -1;
+  
       if (orden.criterio === "nombre") {
         const aNombre = a.nombre ?? "";
         const bNombre = b.nombre ?? "";
@@ -51,17 +55,16 @@ const CardsContainer = () => {
       }
       return 0;
     });
-
+  
+    // Seteo los pokemones ordenados en el estado local
     setOrderedPokemons(pokemonsOrdered);
-  }, [pokemons, type, origin, orden]);
-
+  }, [pokemons, orden, type, origin]);
+  
+  // Paginacion
   const mostrarTodos = paginaActual === -1;
   const comenzar = mostrarTodos ? 0 : (paginaActual - 1) * pokemonsPorPagina;
   const final = mostrarTodos ? orderedPokemons.length : comenzar + pokemonsPorPagina;
-  const currentPokemons = orderedPokemons.slice(
-    comenzar,
-    final
-  );
+  const currentPokemons = orderedPokemons.slice(comenzar, final);
 
   return (
     <div className={style.CardsContainer}>
@@ -78,6 +81,7 @@ const CardsContainer = () => {
               velocidad={pokemon.velocidad}
               altura={pokemon.altura}
               peso={pokemon.peso}
+             
             />
           ))
         : currentPokemons.map((pokemon) => (
@@ -92,6 +96,7 @@ const CardsContainer = () => {
               velocidad={pokemon.velocidad}
               altura={pokemon.altura}
               peso={pokemon.peso}
+          
             />
           ))}
     </div>
