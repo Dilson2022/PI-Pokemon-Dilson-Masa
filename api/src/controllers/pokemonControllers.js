@@ -55,7 +55,7 @@ const getAllPokemon = async () => {
       id: infoFromApi.id,
       nombre: infoFromApi.name,
       tipos: infoFromApi.types.map((t) => t.type.name),
-      img: infoFromApi.sprites.other["official-artwork"].front_default,
+      imagen: infoFromApi.sprites.other["official-artwork"].front_default,
       ataque: infoFromApi.stats[1].base_stat,
       defensa: infoFromApi.stats[2].base_stat,
       velocidad: infoFromApi.stats[5].base_stat,
