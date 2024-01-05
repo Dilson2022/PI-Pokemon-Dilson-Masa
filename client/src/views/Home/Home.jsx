@@ -8,6 +8,7 @@ import Types from "../../components/Types/Types";
 import FilterPokemons from "../../components/Filter/FilterPokemon";
 import PokemonList from "../../components/PokemonList/PokemonList";
 import Pagination from "../../components/Pagination/Pagination";
+//import VolverButton from "../../components/BotonVolver/BotonVolver";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const Home = () => {
 
   return (
     <div>
+      
       <Pagination />
       <PokemonList />
       <FilterPokemons />

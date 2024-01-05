@@ -1,4 +1,4 @@
-import {SET_PAGINATION, ORDENAR_POKEMONES, GET_POKEMONS, GET_POKEMON, GET_SEARCH_POKEMON, GET_ALL_TYPES, FILTER_POKEMONS, ELIMINAR_POKEMON} from "./actions";
+import {SET_PAGINATION, ORDENAR_POKEMONES, GET_POKEMONS, GET_POKEMON, GET_SEARCH_POKEMON, GET_ALL_TYPES, FILTER_POKEMONS } from "./actions";
 
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
         criterio: "nombre",
         ascendente: true,
     },
-    // orderedPokemons: [],
+    orderedPokemons: [],
     currentPage: -1,
 };
 

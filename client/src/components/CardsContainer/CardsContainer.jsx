@@ -11,17 +11,13 @@ const CardsContainer = () => {
   const orden = useSelector((state) => state.orden);
   const paginaActual = useSelector((state) => state.currentPage);
   const pokemonsPorPagina = 12; // Número de pokemons por página
-  
 
   const [orderedPokemons, setOrderedPokemons] = useState([]);
-  
 
   const filterPokemonsByTypeAndOrigin = (pokemon) => {
     const typeCondition =
       !type || (pokemon.tipos && pokemon.tipos.includes(type));
-    //console.log(typeCondition);
     const originCondition = !origin || pokemon.origin === origin;
-    //console.log(originCondition);
     const originAPI = origin === "API";
     const originCreado = origin === "creados";
 
@@ -29,9 +25,8 @@ const CardsContainer = () => {
       //console.log("Origin API ");
       return false;
     }
-
     if (originCreado && pokemon.origin !== "creados") {
-      //console.log("Origin creados")
+      //console.log("Origin creados");
       return false;
     }
 
@@ -40,30 +35,36 @@ const CardsContainer = () => {
 
   useEffect(() => {
     // Filtro por tipo y por origen
-    const pokemonsFilteredByTypeAndOrigin = pokemons.filter(filterPokemonsByTypeAndOrigin);
-  
-    // Ordeno los pokemones 
+    const pokemonsFilteredByTypeAndOrigin = pokemons.filter(
+      filterPokemonsByTypeAndOrigin
+    );
+
+    // Ordeno los pokemones
     const pokemonsOrdered = [...pokemonsFilteredByTypeAndOrigin].sort((a, b) => {
-      const factorOrden = orden.ascendente ? 1 : -1;
-  
-      if (orden.criterio === "nombre") {
-        const aNombre = a.nombre ?? "";
-        const bNombre = b.nombre ?? "";
-        return factorOrden * aNombre.localeCompare(bNombre);
-      } else if (orden.criterio === "ataque") {
-        return factorOrden * (a.ataque - b.ataque);
+        const factorOrden = orden.ascendente ? 1 : -1;
+
+        if (orden.criterio === "nombre") {
+          const aNombre = a.nombre ?? "";
+          const bNombre = b.nombre ?? "";
+        
+          return factorOrden * aNombre.localeCompare(bNombre);
+        } else if (orden.criterio === "ataque") {
+          return factorOrden * (a.ataque - b.ataque);
+        }
+        return 0;
       }
-      return 0;
-    });
-  
+    );
+
     // Seteo los pokemones ordenados en el estado local
     setOrderedPokemons(pokemonsOrdered);
   }, [pokemons, orden, type, origin]);
-  
+
   // Paginacion
   const mostrarTodos = paginaActual === -1;
   const comenzar = mostrarTodos ? 0 : (paginaActual - 1) * pokemonsPorPagina;
-  const final = mostrarTodos ? orderedPokemons.length : comenzar + pokemonsPorPagina;
+  const final = mostrarTodos
+    ? orderedPokemons.length
+    : comenzar + pokemonsPorPagina;
   const currentPokemons = orderedPokemons.slice(comenzar, final);
 
   return (
@@ -81,7 +82,7 @@ const CardsContainer = () => {
               velocidad={pokemon.velocidad}
               altura={pokemon.altura}
               peso={pokemon.peso}
-             
+              
             />
           ))
         : currentPokemons.map((pokemon) => (
@@ -96,7 +97,6 @@ const CardsContainer = () => {
               velocidad={pokemon.velocidad}
               altura={pokemon.altura}
               peso={pokemon.peso}
-          
             />
           ))}
     </div>

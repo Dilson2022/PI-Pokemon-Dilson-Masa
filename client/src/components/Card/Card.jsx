@@ -10,6 +10,7 @@ const Card = (props) => {
     
     return(
       <div className={style.card}>
+        
            {/* <button onClick={()=> onClose(props.id)}  className={style.btn}>X</button> */}
             <img src={props.imagen} alt="Nombre" />
             <p>Nombre:{props.nombre} </p>

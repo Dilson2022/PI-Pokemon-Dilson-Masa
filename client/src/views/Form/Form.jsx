@@ -12,7 +12,7 @@ const Form = () => {
     peso: "",
     altura: "",
     imagen: "",
-    vida: "",
+    
   });
 
   const changeHandler = (event) => {
@@ -20,7 +20,7 @@ const Form = () => {
     const value = event.target.value;
 
     setForm({ ...form, [property]: value });
-    //     validate(form)
+    
   };
 
   const submitHandler = (event) => {
@@ -29,14 +29,14 @@ const Form = () => {
     const camposObligatorios = [
       "nombre",
       "altura",
-      "vida",
       "imagen",
       "peso",
-      
       "ataque",
       "velocidad",
       "defensa",
     ];
+      
+      
     const campoVacio = camposObligatorios.find((campo) => !form[campo]);
 
     if (campoVacio) {
@@ -79,18 +79,6 @@ const Form = () => {
         <span>{form.ataque}</span>
       </div>
 
-      <div>
-        <label>Vida:</label>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={form.vida}
-          onChange={changeHandler}
-          name="vida"
-        />
-        <span>{form.vida}</span>
-      </div>
 
       <div>
         <label>Defensa:</label>
