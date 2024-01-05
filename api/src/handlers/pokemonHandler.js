@@ -20,7 +20,7 @@ const getAllPokemonHandler = async (req, res) => {
 
 const getAllPokemonHandlerId = async (req, res) => {
   const { id } = req.params;
-  //const source = isNaN(id) ? "bdd" : "api";
+  
   try {
     const pokemon = await getPokemonId(id);
     res.status(200).json(pokemon);
@@ -34,8 +34,8 @@ const getAllPokemonHandlerId = async (req, res) => {
 
 const getAllPokemonPost = async (req, res) => {
   try {
-    const {id, imagen, nombre, tipo, ataque, defensa,vida, velocidad, altura, peso, } = req.body;
-    const newPokemon = await createPokemon(id,imagen, nombre, tipo, ataque, defensa, vida, velocidad, altura, peso);
+    const {id, imagen, nombre, tipo, ataque, defensa, velocidad, altura, peso, } = req.body;
+    const newPokemon = await createPokemon(id,imagen, nombre, tipo, ataque, defensa,  velocidad, altura, peso);
     res.status(201).json(newPokemon);
   } catch (error) {
     res.status(400).json({ error: error.message });

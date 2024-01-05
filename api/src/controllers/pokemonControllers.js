@@ -2,6 +2,7 @@ const { Pokemon } = require("../db");
 const axios = require("axios");
 
 const searchPokemonName = async (name) => {
+  //console.log('Buscando Pokémon:', name);
   const databasePokemon = await Pokemon.findAll({ where: { nombre: name } });
 
   if (databasePokemon.length === 0) {
@@ -15,7 +16,7 @@ const searchPokemonName = async (name) => {
       id: apiPokemon.id,
       nombre: apiPokemon.name,
       tipos: apiPokemon.types.map((t) => t.type.name),
-      img: apiPokemon.sprites.other["official-artwork"].front_default,
+      imagen: apiPokemon.sprites.other["official-artwork"].front_default,
       ataque: apiPokemon.stats[1].base_stat,
       defensa: apiPokemon.stats[2].base_stat,
       velocidad: apiPokemon.stats[5].base_stat,
@@ -85,7 +86,7 @@ const getPokemonId = async (id) => {
           name: pokemon.tipo,
         },
       ],
-      vida: pokemon.vida,
+     
     };
   }
 
@@ -99,7 +100,6 @@ const getPokemonId = async (id) => {
     speed: res.stats[5].base_stat,
     height: res.height,
     weight: res.weight,
-    //vida: res.stats[0].base_stat,
     types: res.types.map((t) => {
       return {
         name: t.type.name,
@@ -107,6 +107,7 @@ const getPokemonId = async (id) => {
     }),
   };
 };
+
 
 const createPokemon = async (
   id,
