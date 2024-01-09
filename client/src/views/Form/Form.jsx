@@ -6,13 +6,12 @@ const Form = () => {
   const [form, setForm] = useState({
     tipos: "",
     nombre: "",
-    ataque: "",
-    defensa: "",
-    velocidad: "",
-    peso: "",
-    altura: "",
+    ataque: "0",
+    defensa: "0",
+    velocidad: "0",
+    peso: "0",
+    altura: "0",
     imagen: "",
-    
   });
 
   const changeHandler = (event) => {
@@ -20,7 +19,6 @@ const Form = () => {
     const value = event.target.value;
 
     setForm({ ...form, [property]: value });
-    
   };
 
   const submitHandler = (event) => {
@@ -35,15 +33,25 @@ const Form = () => {
       "velocidad",
       "defensa",
     ];
-      
-      
+
     const campoVacio = camposObligatorios.find((campo) => !form[campo]);
 
     if (campoVacio) {
       alert(`El campo '${campoVacio}' es obligatorio`);
       return;
     }
-    
+
+    // Validar el campo 'nombre'
+    const nombre = form.nombre.trim(); // Eliminar espacios en blanco al inicio y al final
+
+    // Expresión regular para permitir solo letras, espacios y algunos caracteres especiales
+    const regexNombre = /^[A-Za-z\s]+$/;
+
+    if (!regexNombre.test(nombre)) {
+      alert("El campo 'nombre' contiene caracteres no válidos");
+      return;
+    }
+
     axios
       .post("http://localhost:3001/pokemon", form)
       //console.log(form)
@@ -78,7 +86,6 @@ const Form = () => {
         />
         <span>{form.ataque}</span>
       </div>
-
 
       <div>
         <label>Defensa:</label>
