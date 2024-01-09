@@ -5,6 +5,8 @@ const searchPokemonName = async (name) => {
   //console.log('Buscando Pokémon:', name);
   const databasePokemon = await Pokemon.findAll({ where: { nombre: name } });
 
+  
+
   if (databasePokemon.length === 0) {
     // Si no existe en la base de datos, busca en la API
     const apiPokemonUrl = `https://pokeapi.co/api/v2/pokemon/${name}`;
